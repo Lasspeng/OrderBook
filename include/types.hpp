@@ -1,8 +1,7 @@
 #pragma once
 #include <cstdint>
 
-enum class Side
-{
+enum class Side {
   Bid,
   Ask
 };
