@@ -1,4 +1,4 @@
-#include "../include/OrderUpdate.hpp"
+#include "OrderUpdate.hpp"
 
 void OrderUpdate::updateOrder(Order* existingOrder) {
   if (price.has_value())

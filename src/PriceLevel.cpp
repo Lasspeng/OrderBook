@@ -1,4 +1,4 @@
-#include "../include/PriceLevel.hpp"
+#include "PriceLevel.hpp"
 
 PriceLevel::PriceLevel(Price price)
     : price{ price }

@@ -1,5 +1,4 @@
-#pragma once
-#include "../include/Orderbook.hpp"
+#include "Orderbook.hpp"
 
 bool Orderbook::canMatch(Side side, Price price) const {
   if (side == Side::Bid) {
@@ -110,3 +109,5 @@ Trades Orderbook::modifyOrder(OrderId orderId, OrderUpdate& orderUpdate) {
   orderUpdate.updateOrder(existingOrder.get());
   return addOrder(std::move(existingOrder));
 }
+
+std::size_t Orderbook::getSize() { return orders.size(); }

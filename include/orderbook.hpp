@@ -23,4 +23,5 @@ public:
   Trades addOrder(OrderOwner order);
   Trades modifyOrder(OrderId orderId, OrderUpdate& orderUpdate);
   OrderOwner cancelOrder(OrderId orderId);
+  std::size_t getSize();
 };

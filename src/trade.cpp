@@ -1,5 +1,5 @@
 #pragma once
-#include "../include/Trade.hpp"
+#include "Trade.hpp"
 
 Trade::Trade(TradeSideInfo bidInfo, TradeSideInfo askInfo)
         : bidInfo{ bidInfo }
