@@ -1,11 +1,12 @@
 #pragma once
-#include "types.hpp"
-#include "order.hpp"
+#include "Types.hpp"
+#include "Order.hpp"
 #include <map>
 #include <memory>
 #include <unordered_map>
-#include "trade.hpp"
-#include "price_level.hpp"
+#include "Trade.hpp"
+#include "PriceLevel.hpp"
+#include "OrderUpdate.hpp"
 
 class Orderbook {
 private:
@@ -13,10 +14,13 @@ private:
   std::map<Price, PriceLevel, std::less<Price>> asks{ };
   std::unordered_map<OrderId, std::unique_ptr<Order>> orders{ };
 
+  bool canMatch(Side side, Price price) const;
+  Trades matchOrders();
+
 public:
   Orderbook() = default;
   
-  bool canMatch(Side side, Price price) const;
-  Trades matchOrders();
   Trades addOrder(OrderOwner order);
+  Trades modifyOrder(OrderId orderId, OrderUpdate& orderUpdate);
+  OrderOwner cancelOrder(OrderId orderId);
 };

@@ -1,6 +1,6 @@
 #include <cstddef>
-#include "types.hpp"
-#include "order.hpp"
+#include "Types.hpp"
+#include "Order.hpp"
 
 
 class PriceLevel {
@@ -20,6 +20,7 @@ public:
   std::size_t getOrderCount() const;
   Order* getHead() const;
   Order* getTail() const;
+  bool isEmpty() const;
 
   void removeActiveOrder(Order* order);
   void addOrder(Order* order);

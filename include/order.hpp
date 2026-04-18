@@ -1,5 +1,5 @@
 #pragma once
-#include "types.hpp"
+#include "Types.hpp"
 #include <memory>
 
 class Order {
@@ -7,7 +7,8 @@ private:
   OrderId orderId;
   Side side;
   Price price;
-  Volume volume;
+  Volume initialVolume;
+  Volume remainingVolume;
   SequenceNum sequenceNum;
   Order* next{ nullptr };
   Order* prev{ nullptr };
@@ -19,11 +20,17 @@ public:
   OrderId getOrderId() const;
   Side getSide() const;
   Price getPrice() const;
-  Volume getVolume() const;
+  Volume getInitialVolume() const;
+  Volume getRemainingVolume() const;
   SequenceNum getSequenceNum() const;
   Order* getNextOrder() const;
   Order* getPrevOrder() const;
 
+  void setOrderId(OrderId newOrderId);
+  void setSide(Side newSide);
+  void setPrice(Price newPrice);
+  void setInitialVolume(Volume newInitialVolume);
+  void setRemainingVolume(Volume newRemainingVolume);
   void setNextOrder(Order* nextOrder);
   void setPrevOrder(Order* prevOrder);
 

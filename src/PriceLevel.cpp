@@ -1,4 +1,4 @@
-#include "../include/price_level.hpp"
+#include "../include/PriceLevel.hpp"
 
 PriceLevel::PriceLevel(Price price)
     : price{ price }
@@ -13,6 +13,7 @@ Volume PriceLevel::getTotalVolume() const { return totalVolume; }
 std::size_t PriceLevel::getOrderCount() const { return orderCount; }
 Order* PriceLevel::getHead() const { return head; }
 Order* PriceLevel::getTail() const { return tail; }
+bool PriceLevel::isEmpty() const { return head == nullptr; }
 
 void PriceLevel::removeActiveOrder(Order* order) {
   Order* prev{ order->getPrevOrder() };
@@ -31,12 +32,12 @@ void PriceLevel::removeActiveOrder(Order* order) {
   order->setNextOrder(nullptr);
   order->setPrevOrder(nullptr);
 
-  totalVolume -= order->getVolume();
+  totalVolume -= order->getInitialVolume();
   --orderCount;
 }
 
 void PriceLevel::addOrder(Order* order) {
-  totalVolume += order->getVolume();
+  totalVolume += order->getInitialVolume();
   ++orderCount;
 
   if (head == nullptr)
