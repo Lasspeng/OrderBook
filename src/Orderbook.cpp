@@ -110,4 +110,4 @@ Trades Orderbook::modifyOrder(OrderId orderId, OrderUpdate& orderUpdate) {
   return addOrder(std::move(existingOrder));
 }
 
-std::size_t Orderbook::getSize() { return orders.size(); }
+std::size_t Orderbook::getSize() const { return orders.size(); }
