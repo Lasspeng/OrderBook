@@ -31,12 +31,6 @@ Trades Orderbook::matchOrders() {
       bid->fillOrder(volumeFilled);
       ask->fillOrder(volumeFilled);
 
-
-      if (bidPriceLevel.isEmpty())
-        bids.erase(bidPrice);
-      if (askPriceLevel.isEmpty())
-        asks.erase(askPrice);
-
       trades.emplace_back(
         TradeSideInfo{ bid->getOrderId(), bid->getPrice(), volumeFilled },
         TradeSideInfo{ ask->getOrderId(), ask->getPrice(), volumeFilled }
@@ -50,6 +44,11 @@ Trades Orderbook::matchOrders() {
         askPriceLevel.removeActiveOrder(ask);
         orders.erase(ask->getOrderId());
       }
+
+      if (bidPriceLevel.isEmpty())
+        bids.erase(bidPrice);
+      if (askPriceLevel.isEmpty())
+        asks.erase(askPrice);
     }
   }
   return trades;
@@ -111,3 +110,15 @@ Trades Orderbook::modifyOrder(OrderId orderId, OrderUpdate& orderUpdate) {
 }
 
 std::size_t Orderbook::getSize() const { return orders.size(); }
+
+Order* Orderbook::bestBid() const {
+  if (bids.empty()) return nullptr;
+  const PriceLevel& priceLevel{ bids.begin()->second };
+  return priceLevel.getHead();
+}
+
+Order* Orderbook::bestAsk() const {
+  if (asks.empty()) return nullptr;
+  const PriceLevel& priceLevel{ asks.begin()->second };
+  return priceLevel.getHead();
+}
